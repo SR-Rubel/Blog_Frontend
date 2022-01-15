@@ -13,7 +13,7 @@ function Login(props) {
         axios.post('/login',login)
         .then(response=>{
             localStorage.setItem('token',response.data.token);
-            navigate("/", { replace: true });
+            if(response.status === 200) navigate("/", { replace: true });
             console.log(response)
         })
         .catch(error=>{
