@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import PostCard from '../component/PostCard'
 import './Blog.css'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import Pagination from '@material-ui/lab/Pagination'
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -11,6 +11,7 @@ function Blog() {
   const [post, setPost] = useState();
   const [page,setPage]=useState(1);
   const [total,setToatl]=useState();
+  const navigate=useNavigate();
 
   
 
@@ -23,10 +24,21 @@ function Blog() {
             console.log(response);
           })
           .catch(error=>{
-            console.log(error);
+            if(error.response.status === 401) navigate('/login',{replace:true})
           })
 
-  },[page])
+  },[page,navigate])
+
+  const logHandle=(e)=>{
+    e.preventDefault();
+    if(e.target.innerText='log out'){ 
+      axios.get('/logout');
+      localStorage.setItem('token','')
+      navigate('/login',{replace:true})
+    }
+    // else{
+    // }
+  }
 
     return (
     <>
@@ -34,7 +46,7 @@ function Blog() {
         <h2>NameSpace It</h2>
         <Link to='/create'>Create new post</Link>
 
-       <h6><Link to='login'> {localStorage.getItem('token')? 'log out':'login'}</Link></h6> 
+       <h6 onClick={e=>logHandle(e)}>{localStorage.getItem('token') !== ''? 'log out':'login'}</h6> 
       </div>
       
       <div className="row">

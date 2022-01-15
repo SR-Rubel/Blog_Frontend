@@ -13,8 +13,6 @@ function App() {
   return (
     <>
     <div className="App">
-      {/* <Login /> */}
-     
       <Routes>
           <Route  path="/" element={<Blog />}/>
           <Route  path="/login" element={<Login />}/>
@@ -23,7 +21,7 @@ function App() {
           <Route path="post/:id" element={<FullPost />} />
       </Routes>
 
-      {/* <Blog /> */}
+      {/* <Login /> */}
     </div>
     </>
   );

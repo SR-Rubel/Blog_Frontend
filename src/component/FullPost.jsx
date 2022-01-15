@@ -1,20 +1,22 @@
 import axios from 'axios';
 import React,{useEffect,useState} from 'react';
-import {useParams,Link} from 'react-router-dom'
+import {useNavigate,useParams,Link} from 'react-router-dom'
 
 function FullPost(props) {
     const param=useParams()
+    const navigate=useNavigate()
     const [f_post, setF_post] = useState({image:'',title:'',body:''})
     useEffect(() => {
         axios.get('posts/'+param.id)
         .then(response=>{
             setF_post(response.data)
+            navigate("/", { replace: true });
             console.log(response);
         })
         .catch(error=>{
             console.log(error);
         })
-    }, [param.id])
+    }, [param.id,navigate])
 
     const deleteHandler=(e)=>{
         e.preventDefault();
