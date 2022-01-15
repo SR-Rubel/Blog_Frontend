@@ -34,7 +34,7 @@ function Blog() {
         <h2>NameSpace It</h2>
         <Link to='/create'>Create new post</Link>
 
-       <h6>{localStorage.getItem('token')? 'log out':'login'}</h6> 
+       <h6><Link to='login'> {localStorage.getItem('token')? 'log out':'login'}</Link></h6> 
       </div>
       
       <div className="row">

@@ -1,17 +1,19 @@
 import React,{useState} from 'react'
 import './Login.css';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 function Login(props) {
 
     const [login,setLogin]=useState({})
-
+    const navigate=useNavigate()
+    // console.log(na)
     const submitHandler=e=>{
         e.preventDefault()
         axios.post('/login',login)
         .then(response=>{
             localStorage.setItem('token',response.data.token);
-            // props.history.push('/profile');
+            navigate("/", { replace: true });
             console.log(response)
         })
         .catch(error=>{
@@ -44,7 +46,9 @@ function Login(props) {
                         </button>				
                     </form>
                     <div className="form_text">
-                        forgot password?
+                        test with<br/>
+                        email: test@mail.com
+                        password: password
                     </div>
                 </div>
                 <div className="screen__background">
