@@ -18,7 +18,7 @@ function FullPost(props) {
 
     const deleteHandler=(e)=>{
         e.preventDefault();
-        axios.get('/posts/delete/'+param.id)
+        axios.delete('/posts/'+param.id)
         .then(response=>{
             console.log(response)
 
