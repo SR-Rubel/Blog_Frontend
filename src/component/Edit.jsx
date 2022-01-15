@@ -8,7 +8,7 @@ function Edit() {
     }
     console.log(e_post);
     return (
-    <div className="container mt-3">
+    <div className="container d-flex flex-column mt-3">
     <h2>Edit post</h2>
     <form>
         <div className="mb-3 mt-3">

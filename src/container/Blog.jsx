@@ -3,12 +3,13 @@ import PostCard from '../component/PostCard'
 import './Blog.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Blog() {
 
   const [post, setPost] = useState();
-  useEffect(async()=>{
-    await axios.get('/posts')
+  useEffect( ()=>{
+    axios.get('/posts')
           .then(response=>{
             const res=response.data.data
             setPost(res.data)
@@ -22,9 +23,11 @@ function Blog() {
 
     return (
     <>
-    <div className="header">
+    <div className="header d-flex justify-content-between">
         <h2>NameSpace It</h2>
-        <h1>Rubel Hossain</h1>
+        <Link to='/create'>Create new post</Link>
+
+        <h6> Rubel Hossain</h6>
       </div>
       
       <div className="row">
