@@ -4,7 +4,7 @@ import {useParams,Link} from 'react-router-dom'
 
 function FullPost(props) {
     const param=useParams()
-    const [f_post, setF_post] = useState()
+    const [f_post, setF_post] = useState({image:'',title:'',body:''})
     useEffect(() => {
         axios.get('posts/'+param.id)
         .then(response=>{
@@ -14,7 +14,7 @@ function FullPost(props) {
         .catch(error=>{
             console.log(error);
         })
-    }, [])
+    }, [param.id])
 
     const deleteHandler=(e)=>{
         e.preventDefault();
@@ -32,7 +32,7 @@ function FullPost(props) {
     <>
      <div className="d-flex justify-content-center">
         <div className="card">
-            <img src={f_post?.image} className="card-img-top" alt="image" />
+            <img src={f_post?.image} className="card-img-top" alt='img'/>
             <div className="card-body">
                 <h5 className="card-title">{f_post?.title}</h5>
                 <p className="card-text">{f_post?.body}</p>

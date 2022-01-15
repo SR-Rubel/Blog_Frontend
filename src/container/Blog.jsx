@@ -28,10 +28,6 @@ function Blog() {
 
   },[page])
 
-  const handleChange=()=>{
-
-  }
-
     return (
     <>
     <div className="header d-flex justify-content-between">
