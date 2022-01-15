@@ -8,9 +8,9 @@ function Login(props) {
     const [login,setLogin]=useState({})
     const navigate=useNavigate()
     // console.log(na)
-    const submitHandler=e=>{
+    const submitHandler=async(e)=>{
         e.preventDefault()
-        axios.post('/login',login)
+        await axios.post('/login',login)
         .then(response=>{
             localStorage.setItem('token',response.data.token);
             if(response.status === 200) navigate("/", { replace: true });
