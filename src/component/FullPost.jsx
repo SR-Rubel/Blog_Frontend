@@ -10,20 +10,19 @@ function FullPost(props) {
         axios.get('posts/'+param.id)
         .then(response=>{
             setF_post(response.data)
-            navigate("/", { replace: true });
             console.log(response);
         })
         .catch(error=>{
             console.log(error);
         })
-    }, [param.id,navigate])
+    }, [param.id])
 
     const deleteHandler=(e)=>{
         e.preventDefault();
         axios.delete('/posts/'+param.id)
         .then(response=>{
             console.log(response)
-
+            if(response.status === 200)navigate("/", { replace: true });
         })
         .catch(error=>{
             console.log(error);

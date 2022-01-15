@@ -31,7 +31,7 @@ function Blog() {
 
   const logHandle=(e)=>{
     e.preventDefault();
-    if(e.target.innerText='log out'){ 
+    if(e.target.innerText=== 'log out'){ 
       axios.get('/logout');
       localStorage.setItem('token','')
       navigate('/login',{replace:true})
