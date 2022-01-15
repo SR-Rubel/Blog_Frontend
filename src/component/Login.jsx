@@ -1,27 +1,49 @@
-import React from 'react'
-import './Login.css'
+import React,{useState} from 'react'
+import './Login.css';
+import axios from 'axios';
 
-function Login() {
+function Login(props) {
+
+    const [login,setLogin]=useState({})
+
+    const submitHandler=e=>{
+        e.preventDefault()
+        axios.post('/login',login)
+        .then(response=>{
+            localStorage.setItem('token',response.data.token);
+            props.history.push('/profile');
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
+    }
+    console.log(login)
+
     return (
+        <>
         <div className="container">
             <div className="screen">
                 <div className="screen__content">
                     <form className="login">
                         <div className="login__field">
                             <i className="login__icon fas fa-user"></i>
-                            <input type="text" className="login__input" placeholder="Email" />
+                            <input 
+                            onChange={e=>setLogin({...login,email:e.target.value})} type="text" className="login__input" placeholder="Email" />
                         </div>
                         <div className="login__field">
                             <i className="login__icon fas fa-lock"></i>
-                            <input type="password" className="login__input" placeholder="Password" />
+                            <input
+                            onChange={e=>setLogin({...login,password:e.target.value})}
+                            type="password" className="login__input" placeholder="Password" />
                         </div>
-                        <button className="button login__submit">
+                        <button onClick={e=>submitHandler(e)} className="button login__submit">
                             <span className="button__text">Log In Now</span>
                             <i className="button__icon fas fa-chevron-right"></i>
                         </button>				
                     </form>
                     <div className="form_text">
-                        <h3>Forgot Passord?</h3>
+                        forgot password?
                     </div>
                 </div>
                 <div className="screen__background">
@@ -32,6 +54,7 @@ function Login() {
                 </div>		
             </div>
         </div>
+        </>
     )
 }
 

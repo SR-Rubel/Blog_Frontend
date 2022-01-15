@@ -1,42 +1,48 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import PostCard from '../component/PostCard'
 import './Blog.css'
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 function Blog() {
+
+  const [post, setPost] = useState();
+  useEffect(async()=>{
+    await axios.get('/posts')
+          .then(response=>{
+            const res=response.data.data
+            setPost(res.data)
+            console.log(response);
+          })
+          .catch(error=>{
+            console.log(error);
+          })
+
+  },[])
+
     return (
     <>
     <div className="header">
         <h2>NameSpace It</h2>
+        <h1>Rubel Hossain</h1>
       </div>
       
       <div className="row">
         <div className="leftcolumn">
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
-            <PostCard />
+          {
+            post?.map(item=>{
+              return <Link key={item.id} to={"post/"+item.id}>
+                <PostCard
+                    
+                    title={item.title}
+                    body={item.body}
+                    date={item.created_at}
+                    thrumbnail={item.thrumbnail}
+                  />
+              </Link>
+            })
+          }
         </div>
-        {/* <div className="rightcolumn">
-          <div className="card">
-            <h2>About Me</h2>
-            <div className="fakeimg" style="height:100px;">Image</div>
-            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-          </div>
-          <div className="card">
-            <h3>Popular Post</h3>
-            <div className="fakeimg">Image</div><br>
-            <div className="fakeimg">Image</div><br>
-            <div className="fakeimg">Image</div>
-          </div>
-          <div className="card">
-            <h3>Follow Me</h3>
-            <p>Some text..</p>
-          </div>
-        </div> */}
       </div>
       
       <div className="footer">
