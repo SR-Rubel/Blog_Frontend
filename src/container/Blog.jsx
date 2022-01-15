@@ -16,7 +16,11 @@ function Blog() {
   
 
   useEffect( ()=>{
-    axios.get('/posts?page='+page)
+    axios.get('/posts?page='+page,{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
           .then(response=>{
             const res=response.data.data
             setPost(res.data)
@@ -31,7 +35,7 @@ function Blog() {
 
   const logHandle=(e)=>{
     e.preventDefault();
-    if(e.target.innerText=== 'log out'){ 
+    if(e.target.innerText==='log out'){ 
       axios.get('/logout');
       localStorage.setItem('token','')
       navigate('/login',{replace:true})
