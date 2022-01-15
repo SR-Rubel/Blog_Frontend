@@ -11,7 +11,8 @@ function Login(props) {
         axios.post('/login',login)
         .then(response=>{
             localStorage.setItem('token',response.data.token);
-            props.history.push('/profile');
+            // props.history.push('/profile');
+            console.log(response)
         })
         .catch(error=>{
             console.log(error);
