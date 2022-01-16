@@ -1,15 +1,25 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import './CreatePost.css'
+import {useNavigate} from 'react-router-dom'
 
 function CreatePost() {
     const [cpost,setcpost] = useState({});
+    const navigate=useNavigate();
     const updateHandler=(e)=>{
         e.preventDefault();
+        const data=new FormData();
+        data.append('title',cpost.title);
+        data.append('slug',cpost.slug);
+        data.append('body',cpost.body);
+        data.append('image',cpost.image);
 
-        axios.post('/posts/create',cpost)
+        axios.post('/posts',data)
         .then(res=>{
-            console.log(res);
+            if(res.status===200) {
+                alert('post added!!')
+                navigate('/',{replace:true})
+            }
         })
         .catch(err=>{
             console.log(err)
@@ -23,7 +33,7 @@ function CreatePost() {
     <form>
         <div className="mb-3 mt-3">
         <label htmlFor="title">Title</label>
-        <input onChange={e=>{setcpost({...cpost,title:e.target.value})}} type="title" className="form-control" id="title" placeholder="Enter email" name="email" />
+        <input onChange={e=>{setcpost({...cpost,title:e.target.value})}} type="title" className="form-control" id="title" placeholder="Enter title" name="email" />
         <label htmlFor="text">slug</label>
         <input onChange={e=>{setcpost({...cpost,slug:e.target.value})}} type="text" className="form-control" id="slug" placeholder="Enter slug" name="slug" />
         <label htmlFor="body">body</label>
