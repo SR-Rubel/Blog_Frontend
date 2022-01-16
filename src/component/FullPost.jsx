@@ -5,7 +5,7 @@ import {useNavigate,useParams,Link} from 'react-router-dom'
 function FullPost(props) {
     const param=useParams()
     const navigate=useNavigate()
-    const [f_post, setF_post] = useState({image:'',title:'',body:''})
+    const [f_post, setF_post] = useState({image_link:'',title:'',body:''})
     useEffect(() => {
         axios.get('posts/'+param.id)
         .then(response=>{
@@ -33,7 +33,7 @@ function FullPost(props) {
     <>
      <div className="d-flex justify-content-center">
         <div className="card">
-            <img src={f_post?.image} className="card-img-top" alt='img'/>
+            <img src={f_post?.image_link} className="card-img-top" alt='img'/>
             <div className="card-body">
                 <h5 className="card-title">{f_post?.title}</h5>
                 <p className="card-text">{f_post?.body}</p>

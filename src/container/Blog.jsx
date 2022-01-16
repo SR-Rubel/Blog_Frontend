@@ -63,7 +63,7 @@ function Blog() {
                     title={item.title}
                     body={item.body}
                     date={item.created_at}
-                    thrumbnail={item.thrumbnail}
+                    thumbnail={item.thumbnail}
                   />
               </Link>
             })
